@@ -10,13 +10,13 @@ public class Board {
     private final Map<Coordinate, Cell> cells;
 
     // BUILDER
-    public Board() {
+    public Board () {
         cells = new HashMap<>();
         initializeCells();
     }
 
     // METHOD TO INITIALIZE THE CELLS
-    private void initializeCells() {
+    private void initializeCells () {
         Coordinate coordinate;
         Cell cell;
 
