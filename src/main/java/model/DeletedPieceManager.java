@@ -24,8 +24,8 @@ public class DeletedPieceManager implements IDeletedPieceManager {
 
 
     @Override
-    public Piece remove (int index) {
-        Piece piece = get(index);
+    public Piece removeLast (int index) {
+        Piece piece = get(pieces.toArray()[index]);
         pieces.remove(piece);
         return piece;
     }
