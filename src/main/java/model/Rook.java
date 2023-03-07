@@ -3,89 +3,71 @@ package model;
 import java.util.HashSet;
 import java.util.Set;
 
-public class Rook extends Piece {
+public abstract class Rook extends Piece{
 
     // BUILDER
-    public Rook (Board board, Coordinate position, RookType rookType) {
-        super (rookType.getType(), board.getCell(position));
+    public Rook(Type type, Cell cell) {
+        super(type, cell);
     }
 
-    // GET MOVEMENTS AS ROOK STATIC METHOD
-    public static Set<Coordinate> getMovementsAsRook (Piece piece) {
+    // GET NEXT MOVEMENTS METHOD
+    @Override
+    public Set<Coordinate> getNextMovements() {
+        return Rook.getNextMovementsAsRook(this);
+    }
 
+    // GET NEXT MOVEMENTS ROOK METHOD
+    public static Set<Coordinate> getNextMovementsAsRook (Piece p) {
         Set<Coordinate> nextMovements = new HashSet<>();
-        Board board = piece.getPosition().getBoard();
-        Coordinate destination ;
+        Cell cell = p.getCell();
+        Board board = cell.getBoard();
+        Color color = p.getColor();
+
+        Coordinate original = cell.getCoordinate();
+        Coordinate c;
 
         // UP
-        destination = piece.getPosition().up();
-
-        while (board.getCell(destination) != null && board.getCell(destination).isEmpty()) {
-            nextMovements.add(destination);
-            destination = destination.up();
+        c=original.up();
+        while(board.getCell(c)!= null && board.getCell(c).isEmpty()) {
+            nextMovements.add(c);
+            c = c.up();
         }
-
-        if (piece.canMoveTo(destination))
-            nextMovements.add(destination);
+        
+        if(board.getCell(c)!=null && board.getCell(c).getPiece().getColor()!=color)
+            nextMovements.add(c);
 
         // DOWN
-        destination = piece.getPosition().down();
-
-        while (board.getCell(destination) != null && board.getCell(destination).isEmpty()) {
-            nextMovements.add(destination);
-            destination = destination.down();
+        c=original.down();
+        while(board.getCell(c)!= null && board.getCell(c).isEmpty()) {
+            nextMovements.add(c);
+            c = c.down();
         }
-
-        if (piece.canMoveTo(destination))
-            nextMovements.add(destination);
+        
+        if(board.getCell(c)!=null && board.getCell(c).getPiece().getColor()!=color)
+            nextMovements.add(c);
 
         // LEFT
-        destination = piece.getPosition().left();
-
-        while (board.getCell(destination) != null && board.getCell(destination).isEmpty()) {
-            nextMovements.add(destination);
-            destination = destination.left();
+        c=original.left();
+        while(board.getCell(c)!= null && board.getCell(c).isEmpty()) {
+            nextMovements.add(c);
+            c = c.left();
         }
-
-        if (piece.canMoveTo(destination))
-            nextMovements.add(destination);
+        
+        if(board.getCell(c)!=null && board.getCell(c).getPiece().getColor()!=color)
+            nextMovements.add(c);
 
         // RIGHT
-        destination = piece.getPosition().right();
-
-        while(board.getCell(destination)!= null && board.getCell(destination).isEmpty()) {
-            nextMovements.add(destination);
-            destination = destination.right();
+        c=original.right();
+        while(board.getCell(c)!= null && board.getCell(c).isEmpty()) {
+            nextMovements.add(c);
+            c = c.right();
         }
-
-        if (piece.canMoveTo(destination))
-            nextMovements.add(destination);
+        
+        if(board.getCell(c)!=null && board.getCell(c).getPiece().getColor()!=color)
+            nextMovements.add(c);
 
         return nextMovements;
     }
 
-    // GET NEXT MOVEMENTS METHOD
-   @Override
-   public Set<Coordinate> getNextMovements () {
-        return getMovementsAsRook (this);
-   }
 
-    // TYPE ROOK ENUM CLASS
-    public enum RookType {
-
-        BLACK (Piece.Type.BLACK_ROOK), WHITE (Piece.Type.WHITE_ROOK);
-
-        // ROOK TYPE CLASS ATTRIBUTES
-        private Piece.Type type;
-
-        // BUILDER
-        RookType (Piece.Type type) {
-            this.type = type;
-        }
-
-        // GET
-        public Piece.Type getType () {
-            return type;
-        }
-    }
 }

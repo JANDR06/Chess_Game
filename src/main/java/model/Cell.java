@@ -26,10 +26,12 @@ public class Cell {
         this.color = original;
     }
 
+    // RESET COLOR METHOD
     public void resetColor () {
         color = original;
     }
 
+    // HIGHLIGHT METHOD
     public void highlight () {
         if (isEmpty()) {
             if (original == Color.BLACK_CELL)

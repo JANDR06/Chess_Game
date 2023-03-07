@@ -1,36 +1,68 @@
 package model;
 
+import java.util.HashSet;
 import java.util.Set;
 
-public class Bishop extends Piece {
+public abstract class Bishop extends Piece {
 
     // BUILDER
-    public Bishop (Board board, Coordinate position, BishopType bishopType) {
-        super(bishopType.getType(), board.getCell(position));
+    public Bishop (Type type, Cell cell){
+        super(type, cell);
     }
 
     // GET NEXT MOVEMENTS METHOD
     @Override
-    public Set<Coordinate> getNextMovements () {
-        return null;
+    public Set<Coordinate> getNextMovements(){
+        return Bishop.getNextMovementsAsBishop(this);
     }
 
-    // TYPE BISHOP ENUM CLASS
-    public enum BishopType {
+    // GET NEXT MOVEMENTS BISHOP METHOD
+    public static Set<Coordinate> getNextMovementsAsBishop (Piece p) {
+        Set<Coordinate> nextMovements = new HashSet<>();
+        Cell cell = p.getCell();
+        Board board = cell.getBoard();
+        Piece.Color color = p.getColor();
 
-        BLACK (Piece.Type.BLACK_BISHOP), WHITE (Piece.Type.WHITE_BISHOP);
+        Coordinate original = cell.getCoordinate();
+        Coordinate c;
 
-        // BISHOP TYPE CLASS ATTRIBUTES
-        private Piece.Type type;
-
-        // BUILDER
-        BishopType (Piece.Type type) {
-            this.type = type;
+        //DIAGONAL UP LEFT
+        c = original.diagonalUpLeft();
+        while (board.getCell(c)!= null && board.getCell(c).isEmpty()) {
+            nextMovements.add(c);
+            c = c.diagonalUpLeft();
         }
+        if(board.getCell(c)!=null && board.getCell(c).getPiece().getColor()!=color)
+            nextMovements.add(c);
 
-        // GET
-        public Piece.Type getType () {
-            return type;
+        //DIAGONAL UP RIGHT
+        c=original.diagonalUpRight();
+        while(board.getCell(c)!= null && board.getCell(c).isEmpty()) {
+            nextMovements.add(c);
+            c = c.diagonalUpRight();
         }
+        if(board.getCell(c)!=null && board.getCell(c).getPiece().getColor()!=color)
+            nextMovements.add(c);
+
+        //DIAGONAL DOWN LEFT
+        c=original.diagonalDownLeft();
+        while(board.getCell(c)!= null && board.getCell(c).isEmpty()) {
+            nextMovements.add(c);
+            c = c.diagonalDownLeft();
+        }
+        if(board.getCell(c)!=null && board.getCell(c).getPiece().getColor()!=color)
+            nextMovements.add(c);
+
+        //DIAGONAL DOWN RIGHT
+        c=original.diagonalDownRight();
+        while(board.getCell(c)!= null && board.getCell(c).isEmpty()) {
+            nextMovements.add(c);
+            c = c.diagonalDownRight();
+        }
+        if(board.getCell(c)!=null && board.getCell(c).getPiece().getColor()!=color)
+            nextMovements.add(c);
+
+        return nextMovements;
+
     }
 }

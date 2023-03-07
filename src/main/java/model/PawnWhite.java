@@ -1,13 +1,19 @@
 package model;
 
+import java.util.HashSet;
+import java.util.Set;
+
 public class PawnWhite extends Pawn {
+
+    // BUILDER
     public PawnWhite(Cell cell){
         super(Type.WHITE_PAWN, cell);
     }
 
+    // GET NEXT MOVEMENTS METHOD
     @Override
-    public ListCoor getNextMovements() {
-        coordinates = new ListCoor();
+    public Set<Coordinate> getNextMovements() {
+        Set<Coordinate> nextMovements = new HashSet<>();
         Coordinate position = getCell().getCoordinate();
         Coordinate c;
 
@@ -23,18 +29,11 @@ public class PawnWhite extends Pawn {
         c=position.diagonalUpRight();
         checkPawnKiller(c);
 
-        return coordinates;
+        return nextMovements;
 
     }
 
-    // METHOD FOR CREATING A QUEEN
-    @Override
-    protected void createQueen () {
-        Cell cell = this.cell;
-        removePiece();
-        new QueenWhite(cell.getBoard(), cell.getCoordinate());
-    }
-
+    // TRANSFORM METHOD
     @Override
     public void transform() {
         new QueenWhite(getCell());

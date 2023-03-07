@@ -6,7 +6,7 @@ public interface IDeletedPieceManager {
     void addPiece (Piece piece);
 
     // COUNT METHOD
-    int count (Piece.PieceType pieceType);
+    int count (Piece.Type pieceType);
 
     // REMOVE LAST METHOD
     Piece removeLast ();

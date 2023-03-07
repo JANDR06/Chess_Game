@@ -1,29 +1,40 @@
 package model;
 
-public class King extends Piece {
+import java.util.HashSet;
+import java.util.Set;
+
+public abstract class King extends Piece{
 
     // BUILDER
-    public King (Board board, Coordinate position, KingType kingType) {
-        super (kingType.getType(), board.getCell(position));
+    public King(Type type, Cell cell) {
+        super(type, cell);
     }
 
-    // TYPE KING ENUM CLASS
-    public enum KingType {
+    // GET NEXT MOVEMENTS METHOD
+    @Override
+    public Set<Coordinate> getNextMovements() {
+        Set<Coordinate> nextMovements = new HashSet<>();
+        Coordinate position = getCell().getCoordinate();
+        Coordinate c;
 
-        BLACK (Piece.Type.BLACK_KING), WHITE (Piece.Type.WHITE_KING);
+        c = position.up();
+        check(c, nextMovements);
+        c = position.left();
+        check(c, nextMovements);
+        c = position.down();
+        check(c, nextMovements);
+        c = position.right();
+        check(c, nextMovements);
+        c = position.diagonalDownLeft();
+        check(c, nextMovements);
+        c = position.diagonalDownRight();
+        check(c, nextMovements);
+        c = position.diagonalUpLeft();
+        check(c, nextMovements);
+        c = position.diagonalUpRight();
+        check(c, nextMovements);
 
-        // KING TYPE CLASS ATTRIBUTES
-        private Piece.Type type;
+        return nextMovements;
 
-        // BUILDER
-        KingType (Piece.Type type) {
-            this.type = type;
-        }
-
-        // GET
-        public Piece.Type getType () {
-            return type;
-        }
     }
 }
-

@@ -1,53 +1,40 @@
 package model;
 
+import java.util.HashSet;
 import java.util.Set;
 
 public abstract class Pawn extends Piece {
 
     // BUILDER
-    public Pawn (Board board, Coordinate position, Type pawnType) {
-        super (pawnType.getType(), board.getCell(position));
+    public Pawn (Type type, Cell cell) {
+        super (type, cell);
     }
 
-    // SET OF COORDINATES
-    @Override
-    public Set<Coordinate> getNextMovements () {
-        return null;
-    }
+    // TRANSFORM ABSTRACT METHOD
+    public abstract void transform();
 
     // MOVE TO METHOD
     @Override
-    public boolean moveTo (Cell destination) {
-        boolean moved = super.moveTo(destination);
-
-        if (moved)
-            if (cell.getCoordinate().getRow() == 1 &&
-                    chessType.getColor() == Color.WHITE ||
-                    cell.getCoordinate().getRow() == 8 &&
-                            chessType.getColor() == Color.BLACK)
-                createQueen();
-        return moved;
+    public void moveTo (Coordinate c) {
+        super.moveTo(c);
+        if (getCell().getCoordinate().getRow() == 8 ||
+                getCell().getCoordinate().getRow() == 1)
+            transform();
     }
 
-    // CREATE QUEEN ABSTRACT METHOD
-    protected abstract void createQueen();
+    // CHECK PAWN KILLER METHOD
+    protected void checkPawnKiller (Coordinate c) {
+        Set<Coordinate> nextMovements = new HashSet<>();
+        Board board = getCell().getBoard();
+        if ((board.getCell(c) != null) && (board.getCell(c).getPiece().getColor() != getColor()))
+            nextMovements.add(c);
+    }
 
-    // GET PAWN ENUM CLASS
-    public enum Type {
-
-        BLACK (Piece.Type.BLACK_PAWN), WHITE (Piece.Type.WHITE_PAWN);
-
-        // PAWN CLASS ATTRIBUTES
-        private Piece.Type type;
-
-        // BUILDER
-        Type (Piece.Type type) {
-            this.type = type;
-        }
-
-        // GET
-        public Piece.Type getType () {
-            return type;
-        }
+    // CHECK PAWN MOVE METHOD
+    protected void checkPawnMove (Coordinate c) {
+        Set<Coordinate> nextMovements = new HashSet<>();
+        Board board = getCell().getBoard();
+        if ((board.getCell(c) != null) && (board.getCell(c).isEmpty()))
+            nextMovements.add(c);
     }
 }

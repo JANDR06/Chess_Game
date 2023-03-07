@@ -1,43 +1,42 @@
 package model;
 
+import java.util.HashSet;
+import java.util.Set;
+
 public class PawnBlack extends Pawn {
-    public PawnBlack(Cell cell){
+
+    // BUILDER
+    public PawnBlack(Cell cell) {
         super(Type.BLACK_PAWN, cell);
     }
 
+    // GET NEXT MOVEMENTS METHOD
     @Override
-    public ListCoor getNextMovements() {
-        coordinates = new ListCoor();
+    public Set<Coordinate> getNextMovements() {
+        Set<Coordinate> nextMovements = new HashSet<>();
         Coordinate position = getCell().getCoordinate();
         Coordinate c;
 
         c = position.down();
         checkPawnMove(c);
-        if(getCell().getCoordinate().getRow()==2){
+        if (getCell().getCoordinate().getRow() == 2) {
             c = position.down().down();
             checkPawnMove(c);
         }
 
-        c=position.diagonalDownLeft();
+        c = position.diagonalDownLeft();
         checkPawnKiller(c);
-        c=position.diagonalDownRight();
+        c = position.diagonalDownRight();
         checkPawnKiller(c);
 
-        return coordinates;
+        return nextMovements;
+
     }
 
-    // METHOD FOR CREATING A QUEEN
-    @Override
-    protected void createQueen () {
-        Cell cell = this.cell;
-        removePiece();
-        new QueenBlack(cell.getBoard(), cell.getCoordinate());
-    }
-
+    // TRANSFORM METHOD
     @Override
     public void transform() {
         new QueenBlack(getCell());
-        cell=null;
+        cell = null;
     }
-
 }

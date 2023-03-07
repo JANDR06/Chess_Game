@@ -1,28 +1,19 @@
 package model;
 
+import java.util.Set;
+
 public class Queen extends Piece {
 
     // BUILDER
-    public Queen (Board board, Coordinate position, QueenType queenType) {
-        super (queenType.getType(), board.getCell(position));
+    public Queen (Type type, Cell cell) {
+        super(type, cell);
     }
 
-    // TYPE QUEEN ENUM CLASS
-    public enum QueenType {
-
-        BLACK (Piece.Type.BLACK_QUEEN), WHITE (Piece.Type.WHITE_QUEEN);
-
-        // QUEEN TYPE CLASS ATTRIBUTES
-        private Piece.Type type;
-
-        // BUILDER
-        QueenType (Piece.Type type) {
-            this.type = type;
-        }
-
-        // GET
-        public Piece.Type getType () {
-            return type;
-        }
+    // GET NEXT MOVEMENTS METHOD
+    @Override
+    public Set<Coordinate> getNextMovements() {
+        return Bishop.getNextMovementsAsBishop(this).addAll(Rook.getNextMovementsAsRook(this));
     }
+
+
 }

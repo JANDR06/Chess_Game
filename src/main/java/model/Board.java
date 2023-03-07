@@ -49,38 +49,63 @@ public class Board {
 
     // METHOD FOR PLACING THE PIECES
     public void placePieces() {
+        Piece p;
 
         // PLACE KNIGHTS
-        new Knight(this, new Coordinate('B', 1), Knight.KnightType.BLACK);
-        new Knight(this, new Coordinate('G', 1), Knight.KnightType.BLACK);
-        new Knight(this, new Coordinate('B', 8), Knight.KnightType.WHITE);
-        new Knight(this, new Coordinate('G', 8), Knight.KnightType.WHITE);
+        p = new KnightWhite(getCell(new Coordinate('B',8)));
+        p.putInYourPlace();
+        p = new KnightWhite(getCell(new Coordinate('G',8)));
+        p.putInYourPlace();
+
+        p = new KnightBlack(getCell(new Coordinate('B',1)));
+        p.putInYourPlace();
+        p = new KnightBlack(getCell(new Coordinate('G',1)));
+        p.putInYourPlace();
 
         // PLACE BISHOPS
-        new Bishop(this, new Coordinate('C', 1), Bishop.BishopType.BLACK);
-        new Bishop(this, new Coordinate('F', 1), Bishop.BishopType.BLACK);
-        new Bishop(this, new Coordinate('C', 8), Bishop.BishopType.WHITE);
-        new Bishop(this, new Coordinate('F', 8), Bishop.BishopType.WHITE);
+        p = new BishopWhite(getCell(new Coordinate('C',8)));
+        p.putInYourPlace();
+        p = new BishopWhite(getCell(new Coordinate('F',8)));
+        p.putInYourPlace();
+
+        p = new BishopBlack(getCell(new Coordinate('C',1)));
+        p.putInYourPlace();
+        p = new BishopBlack(getCell(new Coordinate('F',1)));
+        p.putInYourPlace();
 
         // PLACE KINGS
-        new King(this, new Coordinate('E', 1), King.KingType.BLACK);
-        new King(this, new Coordinate('E', 8), King.KingType.WHITE);
+        p = new KingWhite(getCell(new Coordinate('D',8)));
+        p.putInYourPlace();
+
+        p = new KingBlack(getCell(new Coordinate('D',1)));
+        p.putInYourPlace();
 
         // PLACE ROOKS
-        new Rook(this, new Coordinate('A', 1), Rook.RookType.BLACK);
-        new Rook(this, new Coordinate('H', 1), Rook.RookType.BLACK);
-        new Rook(this, new Coordinate('A', 8), Rook.RookType.WHITE);
-        new Rook(this, new Coordinate('H', 8), Rook.RookType.WHITE);
+        p = new RookWhite(getCell(new Coordinate('A',8)));
+        p.putInYourPlace();
+        p = new RookWhite(getCell(new Coordinate('H',8)));
+        p.putInYourPlace();
+
+        p = new RookBlack(getCell(new Coordinate('A',1)));
+        p.putInYourPlace();
+        p = new RookBlack(getCell(new Coordinate('H',1)));
+        p.putInYourPlace();
 
         // PLACE QUEENS
-        new Queen(this, new Coordinate('D', 1), Queen.QueenType.BLACK);
-        new Queen(this, new Coordinate('D', 8), Queen.QueenType.WHITE);
+        p = new QueenWhite(getCell(new Coordinate('E',8)));
+        p.putInYourPlace();
+
+        p = new QueenBlack(getCell(new Coordinate('E',1)));
+        p.putInYourPlace();
 
         // PLACE PAWNS
         for (int i = 0; i < 8; i++) {
-            new Pawn(this, new Coordinate((char) ('A' + i), 2), Pawn.Type.BLACK);
-            new Pawn(this, new Coordinate((char) ('A' + i), 7), Pawn.Type.WHITE);
+            p = new PawnBlack(getCell(new Coordinate((char)('A'+i),2)));
+            p.putInYourPlace();
+            p = new PawnWhite(getCell(new Coordinate((char)('A'+i),7)));
+            p.putInYourPlace();
         }
+
     }
 
     // METHOD THAT RETURNS THE ASSOCIATED CELL FROM A DETERMINED COORDINATE
