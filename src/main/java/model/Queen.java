@@ -12,7 +12,10 @@ public class Queen extends Piece {
     // GET NEXT MOVEMENTS METHOD
     @Override
     public Set<Coordinate> getNextMovements() {
-        return Bishop.getNextMovementsAsBishop(this).addAll(Rook.getNextMovementsAsRook(this));
+        Set<Coordinate> nextMovements = Rook.getNextMovementsAsRook(this);
+        nextMovements.addAll(Bishop.getNextMovementsAsBishop(this));
+
+        return nextMovements;
     }
 
 
