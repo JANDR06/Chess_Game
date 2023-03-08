@@ -7,44 +7,31 @@ import static com.diogonunes.jcolor.Ansi.colorize;
 
 public class DeletedPieceManager implements IDeletedPieceManager {
 
+    // DELETED PIECE MANAGER ATTRIBUTES
     private Set<Piece> pieces;
+
+    // BUILDER
     public DeletedPieceManager() { pieces = new HashSet<>(); }
 
+    // ADD PIECE METHOD
     @Override
-    public void addPiece(Piece piece) {
+    public void addPiece (Piece piece) {
         pieces.add(piece);
     }
-    public int count(Piece.Type type) {
-        return pieces.count(type);
+
+    // COUNT METHOD **CORREGIR Y AÑADIR DEBAJO DEL TODO MÉTODO TO STRING**
+    public int count (Piece.Type type) {
+        return pieces.size();
     }
+
+    // GET METHOD
+    public Piece get (int index) { return (Piece) pieces.toArray()[index]; }
+
+    // REMOVE LAST METHOD
     public Piece removeLast() {
-        return pieces.remove(0);
-    }
-
-
-
-    @Override
-    public Piece removeLast (int index) {
-        Piece piece = get(pieces.toArray()[index]);
+        Piece piece = get(0);
         pieces.remove(piece);
         return piece;
-    }
-
-
-    @Override
-    public String toString(){
-        String output="";
-
-        for (Piece.Type type : Piece.Type.values())
-            output += colorize(" " + type.getShape() +" ",type.getColor().getPieceColor(),Cell.Color.BLACK_CELL.getAttribute());
-
-        output += "\n";
-
-        for (Piece.Type type : Piece.Type.values())
-            output += colorize(" " + pieces.count(type) +" ",type.getColor().getPieceColor(),Cell.Color.WHITE_CELL.getAttribute());
-
-        return output;
-
     }
 
 }
