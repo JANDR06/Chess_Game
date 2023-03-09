@@ -26,7 +26,7 @@ public abstract class Pawn extends Piece {
     protected void checkPawnKiller (Coordinate c) {
         Set<Coordinate> nextMovements = new HashSet<>();
         Board board = getCell().getBoard();
-        if ((board.getCell(c) != null) && (board.getCell(c).getPiece().getColor() != getColor()))
+        if ((board.getCell(c) != null) && (!(board.getCell(c).isEmpty())) && (board.getCell(c).getPiece().getColor() != getColor()))
             nextMovements.add(c);
     }
 
