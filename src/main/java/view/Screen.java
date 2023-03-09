@@ -7,12 +7,12 @@ public class Screen {
 
     // METHOD TO SHOW THE FIRST AND LAST ROW OF THE BOARD
     private static String getLetters () {
-        return "                                                                      A  B  C  D  E  F  G  H\n";
+        return "    A  B  C  D  E  F  G  H\n";
     }
 
     // METHOD TO SHOW THE INTERMEDIATE ROWS OF THE BOARD
     private static String getMiddleRows (Board board, int row) {
-        StringBuilder exit = new StringBuilder("                                                                   " + row + " ");
+        StringBuilder exit = new StringBuilder(" " + row + " ");
 
         for (int column = 0; column < 8; column++) {
             exit.append(board.getCell(new Coordinate((char) ('A' + column), row)));
