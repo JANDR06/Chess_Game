@@ -85,7 +85,7 @@ public class Game {
         int row = (int) firstCoordinate.charAt(1) - 48;
 
         // WE CHECK THAT THE COORDINATE DATA IS VALID
-        while (row < 1 || row > 8) {
+        while (column != 'A' && column != 'B' && column != 'C' && column != 'D' && column != 'E' && column != 'F' && column != 'G' && column != 'H' || row < 1 || row > 8) {
             System.err.println("                           COORDINATE ERROR !");
             firstCoordinate = Input.getString("                           Enter a coordinate: ");
 
@@ -108,5 +108,6 @@ public class Game {
 
         System.out.println(ANSI_YELLOW + "                           Where do you want to move it?" + ANSI_RESET);
         String secondCoordinate = Input.getString("                           Enter a coordinate: ");
+
     }
 }
