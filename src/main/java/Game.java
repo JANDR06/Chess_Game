@@ -17,24 +17,19 @@ public class Game {
 
     public static void start() {
 
-        final String ANSI_GREEN = "\u001B[32m";
-        String ANSI_RED = "\u001B[31m";
         String ANSI_YELLOW = "\u001B[33m";
-        String ANSI_BLUE = "\u001B[34m";
-        String ANSI_PURPLE = "\u001B[35m";
-        String ANSI_CYAN = "\u001B[36m";
         String ANSI_RESET = "\u001B[0m";
 
         System.out.println();
-        System.out.println(ANSI_YELLOW + "                                                                                              WELCOME TO CHESS !" + ANSI_RESET);
+        System.out.println(ANSI_YELLOW + "                                                                                             WELCOME TO CHESS !" + ANSI_RESET);
         System.out.println();
 
         // WE ASK THE USER IF HE WANTS TO PLAY OR NOT (IF HE DECIDED PLAY, THE GAME STARTED)
-        int answer = Input.getIntDown("1 - PLAY  /  2 - EXIT");
+        int answer = Input.getInt("                                                                          SELECT WHAT YOU WANT TO DO (1 - PLAY  /  2 - EXIT): ");
 
         while (answer < 1 || answer > 2) {
             System.err.println("ERROR, WRITE A CORRECT NUMBER !!");
-            answer = Input.getIntDown(" 1 - PLAY  /  2 - EXIT");
+            answer = Input.getInt("                                                                          SELECT WHAT YOU WANT TO DO (1 - PLAY  /  2 - EXIT): ");
         }
 
         if (answer == 1) {
@@ -62,6 +57,9 @@ public class Game {
 
 
     public static void game() {
+
+        String ANSI_YELLOW = "\u001B[33m";
+        String ANSI_RESET = "\u001B[0m";
 
         //String playerOne = Input.getString("Name for player #1 (WHITE): ");
         //String playerTwo = Input.getString("Name for player #2 (BLACK): ");
