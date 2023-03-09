@@ -19,8 +19,8 @@ public class DeletedPieceManager implements IDeletedPieceManager {
         pieces.add(piece);
     }
 
-    // COUNT METHOD **CORREGIR Y AÑADIR DEBAJO DEL TODO MÉTODO TO STRING**
-    public int count (Piece.Type type) {
+    // COUNT METHOD
+    public int count (Piece.Type type){
         return pieces.size();
     }
 
@@ -33,5 +33,8 @@ public class DeletedPieceManager implements IDeletedPieceManager {
         pieces.remove(piece);
         return piece;
     }
+
+    // TO STRING METHOD
+
 
 }

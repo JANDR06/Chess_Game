@@ -53,6 +53,7 @@ public abstract class Piece {
         }
     }
 
+
     // TO STRING METHOD
     @Override
     public String toString() {
