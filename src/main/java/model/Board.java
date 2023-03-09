@@ -39,6 +39,7 @@ public class Board {
         }
     }
 
+
     // METHOD TO REMOVE THE HIGHLIGHT FROM THE CELL
     public void resetColors() {
 

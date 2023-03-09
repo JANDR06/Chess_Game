@@ -2,6 +2,9 @@ import model.*;
 import controller.Input;
 import view.Screen;
 
+import java.util.HashSet;
+import java.util.Set;
+
 public class PruebaMain {
     public static void main (String[] args) {
 
@@ -54,11 +57,70 @@ public class PruebaMain {
             String playerTwo = Input.getString("Name for player #2 (BLACK): ");
             System.out.println();
 
-            while () {
-
-            }
 
             Screen.showBoard(b);
+
+
+
+
+
+            Set<Coordinate> coordinates;
+            coordinates = b.getCell(new Coordinate('A', 2)).getPiece().getNextMovements();
+            b.highlight(coordinates);
+            Screen.showBoard(b);
+
+
+
+
+
+
+      //      b.testPlacePawn();
+  //          ListCoor coordinates = b.getCell(new Coordinate('C',7)).getPiece().getNextMovements();
+//        b.highlight(coordinates);
+//        System.out.println(b);
+//        b.resetColors();
+//        System.out.println(b);
+//
+//        b = new Board();
+//        b.testPlaceBishop();
+//        coordinates = b.getCell(new Coordinate('D',6)).getPiece().getNextMovements();
+//        b.highlight(coordinates);
+//        System.out.println(b);
+//        b.resetColors();
+//        System.out.println(b);
+//
+//        b = new Board();
+//        b.testPlaceRook();
+//        coordinates = b.getCell(new Coordinate('D',6)).getPiece().getNextMovements();
+//        b.highlight(coordinates);
+//        System.out.println(b);
+//        b.resetColors();
+//        System.out.println(b);
+//
+//        b = new Board();
+//        b.testPlaceQueen();
+//        coordinates = b.getCell(new Coordinate('D',6)).getPiece().getNextMovements();
+//        b.highlight(coordinates);
+//        System.out.println(b);
+//        b.resetColors();
+//        System.out.println(b);
+//
+//        b = new Board();
+//        b.testPlaceKing();
+//        coordinates = b.getCell(new Coordinate('D',6)).getPiece().getNextMovements();
+//        b.highlight(coordinates);
+//        System.out.println(b);
+//        b.resetColors();
+//        System.out.println(b);
+//
+//        b = new Board();
+//        b.testPlaceKnight();
+//        coordinates = b.getCell(new Coordinate('D',6)).getPiece().getNextMovements();
+//        b.highlight(coordinates);
+//        System.out.println(b);
+//        b.resetColors();
+//        System.out.println(b);
+//
 
 
         } else {
