@@ -53,6 +53,25 @@ public abstract class Piece {
         }
     }
 
+    public boolean canMoveTo (Coordinate destination) {
+        
+        Cell cell = this.cell.getBoard().getCell(destination);
+        
+        // A
+        if(cell==null)
+            return false;
+        
+        // B
+        if(cell.isEmpty())
+            return true;
+        
+        // C
+        if(cell.getPiece().getColor() != getColor()) 
+            return true;
+        
+        return false;
+    }
+
 
     // TO STRING METHOD
     @Override

@@ -70,6 +70,8 @@ public class Game {
         b.placePieces();
         Screen.showBoard(b);
 
+
+        // START COORDINATE
         System.out.println();
         System.out.println(ANSI_YELLOW + "                           Move " + playerOne + " -> WHITE" + ANSI_RESET);
         System.out.println("                           Wich piece do you want to move?");
@@ -83,6 +85,25 @@ public class Game {
 
         char column = firstCoordinate.charAt(0);
         int row = (int) firstCoordinate.charAt(1) - 48;
+
+
+
+        // CHECK IF THERE IS A PIECE IN THE SELECTED COORDINATE OR NOT
+        while (! b.getCell(new Coordinate(column, row)).containsPiece()) {
+            System.err.println("                           COORDINATE ERROR !");
+            firstCoordinate = Input.getString("                           Enter a coordinate: ");
+
+            while (firstCoordinate.length() != 2) {
+                System.err.println("                           COORDINATE ERROR !");
+                firstCoordinate = Input.getString("                           Enter a coordinate: ");
+
+            }
+
+            column = firstCoordinate.charAt(0);
+            row = (int) firstCoordinate.charAt(1) - 48;
+        }
+
+
 
         // WE CHECK THAT THE COORDINATE DATA IS VALID
         while (column != 'A' && column != 'B' && column != 'C' && column != 'D' && column != 'E' && column != 'F' && column != 'G' && column != 'H' || row < 1 || row > 8) {
@@ -106,8 +127,43 @@ public class Game {
         b.highlight(coordinates);
         Screen.showBoard(b);
 
+
+
+
+
+        // DESTINATION COORDINATE
         System.out.println(ANSI_YELLOW + "                           Where do you want to move it?" + ANSI_RESET);
         String secondCoordinate = Input.getString("                           Enter a coordinate: ");
+
+        // WE CHECK IF THE COORDINATE HAS LENGTH = 2 (EX: B5)
+        while (secondCoordinate.length() != 2) {
+            System.err.println("                           COORDINATE ERROR !");
+            secondCoordinate = Input.getString("                           Enter a coordinate: ");
+        }
+
+        char columnTwo = secondCoordinate.charAt(0);
+        int rowTwo = (int) secondCoordinate.charAt(1) - 48;
+
+        // WE CHECK THAT THE COORDINATE DATA IS VALID
+        while (columnTwo != 'A' && columnTwo != 'B' && columnTwo != 'C' && columnTwo != 'D' && columnTwo != 'E' && columnTwo != 'F' && columnTwo != 'G' && columnTwo != 'H' || rowTwo < 1 || rowTwo > 8) {
+            System.err.println("                           COORDINATE ERROR !");
+            secondCoordinate = Input.getString("                           Enter a coordinate: ");
+
+
+            while (secondCoordinate.length() != 2) {
+                System.err.println("                           COORDINATE ERROR !");
+                secondCoordinate = Input.getString("                           Enter a coordinate: ");
+
+            }
+
+            columnTwo = secondCoordinate.charAt(0);
+            rowTwo = (int) secondCoordinate.charAt(1) - 48;
+
+        }
+
+        b.getCell (new Coordinate(column, row)).getPiece().moveTo(new Coordinate(columnTwo, rowTwo));
+        b.resetColors();
+        Screen.showBoard(b);
 
     }
 }

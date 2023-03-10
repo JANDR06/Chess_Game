@@ -18,7 +18,7 @@ public class Screen {
             exit.append(board.getCell(new Coordinate((char) ('A' + column), row)));
         }
 
-        return exit.append("" + row + "\n").toString();
+        return exit.append(" " + row + "\n").toString();
     }
 
     // METHOD TO SHOW THE BOARD
@@ -34,3 +34,4 @@ public class Screen {
         System.out.println(exit);
     }
 }
+
